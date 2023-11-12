@@ -14,7 +14,7 @@
     name: common
     tasks_from: app-prereq
   vars:
-    app_dir: /usr/share/nginx/html
+    app_dir: /usr/share/nginx/html/
     component: frontend
 #Instead of this bellow comment commands u can create one common role d where kept ur code and call it from here,refer above command
 
