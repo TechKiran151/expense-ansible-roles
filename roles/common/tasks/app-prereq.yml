@@ -1,0 +1,15 @@
+- name: Clean old nginx directory
+  ansible.builtin.file:
+    path: "{{ app_dir }}" #Here we are going to delete the directory
+    staet: absent
+
+- name: Create the nginx directory
+  ansible.builtin.file:
+    path: "{{ app_dir }}"  # This is the folder
+    state: directory    #State directory means we are going create directory
+
+- name: Download and Extract frontend content
+  ansible.builtin.unarchive:  #Here we are going to download the file and extract that file into destination like /usr/share/nginx/html
+    src: https://expense-artifacts.s3.amazonaws.com/{{component}}.zip
+    dest: " {{ app_dir }}"
+    remote_src: yes

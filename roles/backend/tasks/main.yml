@@ -1,41 +1,58 @@
 - name: Disable NodeJS default version
   ansible.builtin.shell: dnf module disable nodejs -y
+
 - name: Enable nodejs 18 version
   ansible.builtin.shell: dnf module enable nodejs:18 -y
+
 - name: Install NodeJS
   ansible.builtin.dnf:
     name: nodejs
     state: present
+
 - name: Copy backend service file
   ansible.builtin.copy:
     src: backend.service
     dest: /etc/systemd/system/backend.service
+
 - name: Add Application User
   ansible.builtin.user:
     name: expense
-- name: Delete old app directory
-  ansible.builtin.file:
-    path: /app
-    state: absent
-- name: Create App directory
-  ansible.builtin.file:
-    path: /app
-    state: directory
-- name: Downlaod and extract the file
-  ansible.builtin.unarchive:
-    src: https://expense-artifacts.s3.amazonaws.com/backend.zip
-    dest: /app
-    remote_src: yes
+#Bellow command u can search like "import role ansible"
+- name: Import common role - app Pre-requisites
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-prereq
+
+#Instead of this bellow comment commands u can create one common role d where kept ur code and call it from here,refer above command
+#- name: Delete old app directory
+#  ansible.builtin.file:
+#    path: /app
+#    state: absent
+#
+#- name: Create App directory
+#  ansible.builtin.file:
+#    path: /app
+#    state: directory
+#
+#- name: Downlaod and extract the file
+#  ansible.builtin.unarchive:
+#    src: https://expense-artifacts.s3.amazonaws.com/backend.zip
+#    dest: /app
+#    remote_src: yes
+
 - name: Downlaod Nodejs dependencies
   ansible.builtin.shell: npm install #it should be download in /app so u can search like "ansible.builtin.shell ansible" u will get result like bellow
   args:
     chdir: /app
+
 - name: Install mysql client to load schema
   ansible.builtin.dnf:
     name: mysql
     state: present
+
 - name: Load schema
   ansible.builtin.shell: mysql -h mysql-dev.kiran85.online -uroot -p{{MYSQL_ROOT_PASSWORD}} < /app/schema/backend.sql
+
 - name: Starting the backend service
   ansible.builtin.systemd:
     name: backend
