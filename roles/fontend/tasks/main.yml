@@ -1,0 +1,25 @@
+- name: Installing nginx
+  ansible.builtin.dnf: #this one is used to execute the shell command
+    name: nginx        #Here we are give service name
+    state: present #for installing nginx we need give state as present (If u want know that u can search like "install dnf package ansible collection".
+- name: Copy Expense Config file
+  ansible.builtin.copy:
+    src: expense.conf  #copy file
+    dest: /etc/nginx/default.d/expense.conf #put that file in this folder
+- name: Clean old nginx directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html #Here we are going to delete the directory
+- name: Create the nginx directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html  # This is the folder
+    state: directory    #State directory means we are going create directory
+- name: Download and Extract frontend content
+  ansible.builtin.unarchive:  #Here we are going to download the file and extract that file into destination like /usr/share/nginx/html
+    src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
+    dest: /usr/share/nginx/html
+    remote_src: yes
+- name: Start nginx service
+  ansible.builtin.systemd:
+    name: nginx
+    state: restarted  #Here we are going to restart the nginx
+    enabled: yes
