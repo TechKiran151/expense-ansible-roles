@@ -22,6 +22,9 @@
   ansible.builtin.import_role:
     name: common
     tasks_from: app-prereq
+  vars:
+    app_dir: /app
+    component: backend
 
 #Instead of this bellow comment commands u can create one common role d where kept ur code and call it from here,refer above command
 #- name: Delete old app directory
