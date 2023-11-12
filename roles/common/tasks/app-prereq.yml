@@ -1,7 +1,7 @@
 - name: Clean old nginx directory
   ansible.builtin.file:
     path: "{{ app_dir }}" #Here we are going to delete the directory
-    staet: absent
+    state: absent
 
 - name: Create the nginx directory
   ansible.builtin.file:
