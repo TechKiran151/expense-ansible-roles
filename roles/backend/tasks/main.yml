@@ -11,7 +11,7 @@
 
 - name: Copy backend service file
  # ansible.builtin.copy:  copy module is doing job only copy the code so instead of that we are using template
-  ansible.builtin.template: #template is doing the job like copy the code and it will check the condistions also
+  ansible.builtin.templates: #template is doing the job like copy the code and it will check the condistions also
     src: backend.service
     dest: /etc/systemd/system/backend.service
 
