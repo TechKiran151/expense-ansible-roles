@@ -4,7 +4,7 @@
     state: present #for installing nginx we need give state as present (If u want know that u can search like "install dnf package ansible collection".
 
 - name: Copy Expense Config file
-  ansible.builtin.templates:
+  ansible.builtin.template:
     src: expense.conf  #copy file
     dest: /etc/nginx/default.d/expense.conf #put that file in this folder
 
