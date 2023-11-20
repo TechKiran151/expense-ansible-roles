@@ -34,13 +34,14 @@
 #    dest: /usr/share/nginx/html
 #    remote_src: yes
 
+- name: Import ELK Role - filebeat
+  ansible.builtin.import_role:
+    name: elk
+    tasks_from: filebeat
+
 - name: Start nginx service
   ansible.builtin.systemd:
     name: nginx
     state: restarted  #Here we are going to restart the nginx
     enabled: yes
 
-- name: Import ELK Role - filebeat
-  ansible.builtin.import_role:
-    name: elk
-    tasks_from: filebeat
