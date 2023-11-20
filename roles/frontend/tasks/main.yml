@@ -40,7 +40,7 @@
     state: restarted  #Here we are going to restart the nginx
     enabled: yes
 
-- name: Import common role - app Pre-requisites
+- name: Import ELK Role - filebeat
   ansible.builtin.import_role:
     name: elk
     tasks_from: filebeat
