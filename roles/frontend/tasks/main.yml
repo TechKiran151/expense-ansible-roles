@@ -1,7 +1,7 @@
 - name: Installing nginx
   ansible.builtin.dnf: #this one is used to execute the shell command
     name: nginx        #Here we are give service name
-    state: present #for installing nginx we need give state as present, If u want that u can search like "install dnf package ansible collection".
+    state: present #for installing nginx we need give state as present, If u want know that u can search like "install dnf package ansible collection".
 
 - name: Copy Expense Config file
   ansible.builtin.template:
