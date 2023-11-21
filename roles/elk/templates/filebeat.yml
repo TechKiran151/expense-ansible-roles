@@ -150,8 +150,8 @@ setup.kibana:
   #password: "changeme"
 
   # ------------------------------ Logstash Output -------------------------------
-  output.logstash:
-   The Logstash hosts
+output.logstash:
+   #The Logstash hosts
  # hosts: ["localhost:5044"] #this replace with elk privite IP address
   hosts: ["172.31.76.135:5044"]
 
