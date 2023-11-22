@@ -50,9 +50,9 @@ filebeat.inputs:
     #prospector.scanner.exclude_files: ['.gz$']
 
     # Optional additional fields. These fields can be freely picked
-  # to add additional information to the crawled log files for filtering
-fields:
-  componnet: {{ component }}
+    #to add additional information to the crawled log files for filtering
+    fields:
+      componnet: {{ component }}
   #  level: debug
   #  review: 1
 
