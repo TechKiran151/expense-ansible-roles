@@ -1,2 +1,3 @@
 component: frontend
-log_file: /var/log/nginx/access.log  # that nginx log will store in this path
+log_file: /var/log/nginx/access.log # that nginx log will store in this path
+is_rsyslog_needed: no
